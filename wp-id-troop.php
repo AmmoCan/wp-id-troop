@@ -3,7 +3,7 @@
 Plugin Name: WP ID Troop
 Plugin URI: https://github.com/AmmoCan/wp-id-troop
 Description: Simple non-bloated Military and Veteran verification using the ID.me API.
-Version: 1.0.0
+Version: 0.9.0
 Author: AmmoCan
 Author URI: http://www.linkedin.com/in/ammocan
 License: GPLv2 or later
@@ -17,6 +17,7 @@ require_once 'vendor/autoload.php';
 
 class WpIdTroop {};
 
+// Create the plugin's settings page
 function wp_id_troop_settings_page() {
 ?>
   <div class="wrap">
@@ -32,6 +33,7 @@ function wp_id_troop_settings_page() {
 <?php
 }
 
+// Add menu item to admin navigation
 function add_wp_id_troop_menu_item() {
   
 	add_menu_page(
@@ -47,6 +49,7 @@ function add_wp_id_troop_menu_item() {
 }
 add_action('admin_menu', 'add_wp_id_troop_menu_item');
 
+// Create fields to be displayed in settings page
 function display_client_redirect_element() {
 	?>
     <input type="text" name="client_redirect" id="client_redirect" value="<?php echo get_option('client_redirect')?>" />
@@ -65,6 +68,7 @@ function display_client_secret_element() {
   <?php
 }
 
+// Display created fields in settings page
 function display_wp_id_troop_fields() {
 	add_settings_section('section', 'All Settings', null, 'wpidtroop-options');
 	
@@ -79,6 +83,7 @@ function display_wp_id_troop_fields() {
 
 add_action('admin_init', 'display_wp_id_troop_fields');
 
+// Create the verify by troop id button
 function wp_id_troop_display_btn() {
   
   if ( ! isset( $_SESSION['payload'] ) ):
@@ -109,7 +114,8 @@ function wp_id_troop_btn_shortcode() {
     return ob_get_clean();
 }
 add_shortcode( 'wp_id_troop', 'wp_id_troop_btn_shortcode' );
-  
+
+// Handle the OAuth 2.0 authentication
 function wp_id_troop_handle_oauth() {
   
   // Get the saved application info
