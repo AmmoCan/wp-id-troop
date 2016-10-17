@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP ID Troop
-Plugin URI: http://www.2-Drops.com
+Plugin URI: https://github.com/AmmoCan/wp-id-troop
 Description: Simple non-bloated Military and Veteran verification using the ID.me API.
 Version: 1.0.0
 Author: AmmoCan
