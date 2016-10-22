@@ -89,7 +89,7 @@ function wp_id_troop_display_btn() {
   if ( ! isset( $_SESSION['payload'] ) ):
   ?>
   
-    <form method="post" action="<?php echo admin_url( 'admin-post.php'); ?>">
+    <form method="post" action="<?php echo get_site_url() . '/wp-admin/admin-ajax.php?action=wp_id_troop_handle_oauth'; ?>">
       
       <input type="hidden" name="action" value="oauth_submit" />
       <input type="image" src="https://s3.amazonaws.com/idme/developer/idme-buttons-2.0.1/assets/img/btn-alt-Troop.png" border="0" class="idme-btn-primary-sm-Troop" alt="Submit" />
@@ -177,4 +177,5 @@ function wp_id_troop_handle_oauth() {
     update_option( 'wpidtroop_token', $accessToken->getToken(), TRUE );
   }
 }
-add_action( 'admin_post_oauth_submit', 'wp_id_troop_handle_oauth' );
+add_action( 'wp_ajax_oauth_submit', 'wp_id_troop_handle_oauth' );
+add_action( 'wp_ajax_nopriv_oauth_submit', 'wp_id_troop_handle_oauth' );
